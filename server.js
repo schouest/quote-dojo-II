@@ -25,14 +25,17 @@ app.get('/quote', function(req, res) {
     else{
     res.render('main',{quotes: quotes});
     }
-  })
+  }).sort({created_at: -1});
 })
 
 app.post('/quote', function(req, res) {
 
  console.log("POST DATA", req.body);
-
-  var quote = new Quote({name: req.body.name, quote: req.body.quote});
+  var d = new Date();
+  d.getTime();
+  console.log(d);
+ 
+  var quote = new Quote({name: req.body.name, quote: req.body.quote, created_at: d});
   quote.save(function(err) {
     if(err) {
       console.log('something went wrong');
@@ -48,7 +51,8 @@ mongoose.connect('mongodb://localhost/quote_dojo');
 
 var QuoteSchema = new mongoose.Schema({
  name: String,
- quote: String
+ quote: String,
+ created_at: Date
 })
 
 var Quote = mongoose.model('Quote', QuoteSchema);
