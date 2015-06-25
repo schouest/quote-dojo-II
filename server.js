@@ -17,14 +17,15 @@ app.get('/', function(req, res) {
 })
 
 app.get('/quote', function(req, res) {
-  Quote.find({}, function(err, users) {
+  Quote.find({}, function(err, quotes) {
   if (err) {return console.error(err);}
     // notice how the first parameter is the options for what to find and the second is the callback function that has an error (if any) and all of the users
     // keep in mind that everything you want to do AFTER you get the data from the database must happen inside of this callback for it to be synchronous 
     // Make sure you handle the case for when there is an error as well as the case for when there is no error
+    else{
+    res.render('main',{quotes: quotes});
+    }
   })
-
- res.render('main');
 })
 
 app.post('/quote', function(req, res) {
@@ -42,7 +43,6 @@ app.post('/quote', function(req, res) {
   })
  res.redirect('/quote');
 })
-
 // how we connect to mongodb database using mongoose -- "basic_mongoose" is the name of our db in mongodb -this should match the name of your DB
 mongoose.connect('mongodb://localhost/quote_dojo');
 
@@ -52,7 +52,6 @@ var QuoteSchema = new mongoose.Schema({
 })
 
 var Quote = mongoose.model('Quote', QuoteSchema);
-
 
 // listen on 8000
 app.listen(8000, function() {

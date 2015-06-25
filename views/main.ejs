@@ -3,5 +3,12 @@
 </head>
 <body>
 <h2>QUOTES</h2>
+<% for (x in quotes){ %>
+<h4><%= quotes[x].name %></h4>
+
+<p><%= quotes[x].quote %><p>
+	<hr>
+	<% } %>
+<a href="/">back</a>
 </body>
 </html>
