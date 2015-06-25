@@ -1,0 +1,21 @@
+<html>
+<head>
+<style>
+	textarea{
+		resize:none;
+	}
+	button{
+		height:50px;
+		width:200px;
+	}
+</style>
+</head>
+<body>
+<form method='post' action='/quote'>
+	<label>Name<input type='text' name='name' required></label><br>
+	<label>Your Quote<textarea cols='40' rows='8' name='quote'></textarea></label>
+	<button value='submit' type='submit'>Submit</button>
+</form>
+<a href="/quote">View Quotes</a>
+</body>
+</html>
